@@ -96,9 +96,8 @@ module.exports = {
   remove: async (ctx) => {
     const fm = strapi.plugins['storage'].services.storage;
 
-    Object.keys(ctx.query).forEach( key => {
-        let file = ctx.query[key];
-        let p = path.join(rootDir, file);
+    ctx.query['files'].forEach( file => {
+        let p = path.join(rootDir, file.path);
         fm.remove(p);
     });
 
